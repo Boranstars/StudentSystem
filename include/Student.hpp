@@ -26,8 +26,7 @@ public:
      * @param score 
      */
     Student(int id, std::string name, double score): id(id), name(name), score(score) {};
-
-    // 对外的getter和setter接口
+    Student(int id, std::string name, double regularScore, double finalScore): id(id), name(name), score(0.2 * regularScore + 0.8 * finalScore) {};
     int getId() const { return id; }
     std::string getName() const { return name; }
     double getScore() const { return score; }
@@ -46,7 +45,7 @@ public:
     // 重载输出运算符
     friend std::ostream &operator<<(std::ostream &os, const Student &student)
     {
-        os << student.id << " " << student.name << " " << student.score;
+        os << student.id << " \t" << student.name << " \t" << student.score;
         return os;
     }
 private:

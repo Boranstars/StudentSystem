@@ -51,7 +51,7 @@ void addStudent(std::unordered_map<int, Student> &students)
     // 输入学生id, 如果学生id已存在, 则提示用户重新输入
     int id;
     std::string name;
-    double score;
+    double regularScore, finalScore;
     std::cout << "请输入学生id: \n";
     safeInput(id);
     if (students.find(id) != students.end()) {
@@ -62,11 +62,13 @@ void addStudent(std::unordered_map<int, Student> &students)
     // 输入学生姓名和成绩
     std::cout << "请输入学生姓名: \n";
     std::cin >> name;
-    std::cout << "请输入学生成绩: \n";
-    safeInput(score);
+    std::cout << "请输入学生平时成绩: \n";
+    safeInput(regularScore);
+    std::cout << "请输入学生期末成绩: \n";
+    safeInput(finalScore);
 
     // 添加学生
-    students[id] = Student(id, name, score);
+    students[id] = Student(id, name, regularScore, finalScore);
     std::cout << "添加成功" << std::endl;
 
     // 清屏
@@ -191,6 +193,7 @@ void printStudents(const std::unordered_map<int, Student> &students)
         return;
     }
     
+    std::cout << "学号\t姓名\t成绩\n";
     // 将学生信息存储到vector中
     std::vector<Student> studentList;
     for (const auto& pair : students) {

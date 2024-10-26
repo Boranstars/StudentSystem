@@ -1,5 +1,8 @@
 
 # 学生管理系统
+[![CMake on multiple platforms](https://github.com/Boranstars/StudentSystem/actions/workflows/cmake-multi-platform.yml/badge.svg?branch=main)](https://github.com/Boranstars/StudentSystem/actions/workflows/cmake-multi-platform.yml)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![C++ Standard](https://img.shields.io/badge/C++-17-blue.svg)
 
 ## 项目简介
 

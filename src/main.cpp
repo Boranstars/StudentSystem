@@ -1,5 +1,6 @@
 #include "Student.hpp"
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <limits>
 #include <unordered_map>
@@ -23,7 +24,7 @@ inline void clearScreen()
  * @param input 
  */
 void safeInput(int &input) {
-    while (!(std::cin >> input)) {
+    while (!(std::cin >> input && input >= 0)) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "输入无效，请输入一个有效的整数: ";
@@ -35,7 +36,7 @@ void safeInput(int &input) {
  * @param input 
  */
 void safeInput(double &input) {
-    while (!(std::cin >> input)) {
+    while (!(std::cin >> input && input > 0.0l)) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "输入无效，请输入一个有效的数字: ";
@@ -206,6 +207,32 @@ void printStudents(const std::unordered_map<int, Student> &students)
         std::cout << _student << std::endl;
     }
 
+    
+
+    // 计算学生成绩的分位数
+    std::vector<double> scores;
+    for (const auto& student : studentList) {
+        scores.push_back(student.getScore());
+    }
+
+    std::sort(scores.begin(), scores.end());
+
+    auto calculatePercentile = [&](double percentile) -> double {
+        size_t index = static_cast<size_t>(std::ceil(percentile * scores.size())) - 1;
+        if (index >= scores.size()) {
+            index = scores.size() - 1;
+        }
+        return scores[index];
+    };
+
+    double q1 = calculatePercentile(0.25);
+    double median = calculatePercentile(0.5);
+    double q3 = calculatePercentile(0.75);
+
+    std::cout << "\n学生成绩分位数：\n";
+    std::cout << "Q1 (25%): " << q1 << "\n";
+    std::cout << "Median (50%): " << median << "\n";
+    std::cout << "Q3 (75%): " << q3 << "\n";
     // 清屏
     clearScreen();
 }
